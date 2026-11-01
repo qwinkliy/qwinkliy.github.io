@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oleh Kharkivskyi — Aspiring Cybersecurity Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--muted:#555;--red:#d4101c;--char:#2b2b2d;--line:rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:#e4e4e6;
+  font:15px/1.9 "Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;letter-spacing:.06em}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+
+/* crystal background, fixed behind everything */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;
+  background:
+   radial-gradient(circle at 18% 22%,rgba(255,255,255,.95) 0 9%,transparent 22%),
+   radial-gradient(circle at 62% 12%,rgba(255,255,255,.8) 0 7%,transparent 20%),
+   radial-gradient(circle at 80% 58%,rgba(255,255,255,.7) 0 8%,transparent 24%),
+   radial-gradient(circle at 30% 80%,rgba(255,255,255,.75) 0 8%,transparent 22%),
+   linear-gradient(135deg,#dededf,#f1f1f2 45%,#d8d8da)}
+.bg i{position:absolute;display:block}
+.f1{inset:0;background:linear-gradient(120deg,rgba(255,255,255,.55),rgba(0,0,0,.04));clip-path:polygon(0 0,58% 0,36% 100%,0 100%)}
+.f2{inset:0;background:linear-gradient(200deg,rgba(0,0,0,.07),rgba(255,255,255,.4));clip-path:polygon(58% 0,100% 0,100% 70%,36% 100%)}
+.f3{inset:0;background:linear-gradient(60deg,rgba(255,255,255,.5),rgba(0,0,0,.06));clip-path:polygon(36% 100%,100% 70%,100% 100%)}
+.dark1{width:26vw;height:18vw;right:-3vw;top:-4vw;background:var(--char);clip-path:polygon(12% 0,100% 0,100% 80%,0 100%)}
+.dark2{width:20vw;height:12vw;left:-2vw;bottom:-1vw;background:var(--char);clip-path:polygon(0 30%,100% 0,70% 100%,0 100%)}
+.sq{width:5.6vw;height:5.6vw;min-width:44px;min-height:44px;left:3vw;bottom:14vh;background:var(--red);transform:rotate(28deg)}
+.tri{width:7vw;height:10vw;min-width:48px;min-height:68px;right:3vw;bottom:4vh;background:var(--red);clip-path:polygon(50% 0,100% 100%,0 85%)}
+
+/* top nav */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;
+  padding:26px clamp(20px,5vw,64px);font-size:.82rem}
+.logo{font-size:1.5rem;font-weight:400;letter-spacing:.04em;text-decoration:none}
+.logo b{color:var(--red);font-weight:400}
+nav.top ul{display:flex;gap:clamp(14px,3vw,38px);list-style:none;margin:0;padding:0}
+nav.top a{text-decoration:none}
+nav.top a:hover{color:var(--red)}
+
+/* side dots */
+.dots{position:fixed;right:clamp(14px,3vw,40px);top:50%;transform:translateY(-50%);z-index:5;
+  display:flex;flex-direction:column;gap:22px}
+.dots a{width:7px;height:7px;border-radius:50%;background:var(--ink);display:block;transition:.25s}
+.dots a.on{background:var(--red);transform:scale(1.5)}
+.vert{position:fixed;left:clamp(10px,2.4vw,32px);top:50%;z-index:5;writing-mode:vertical-rl;transform:translateY(-50%) rotate(180deg);
+  font-size:.7rem}
+
+.page{min-height:100vh;animation:fade .5s ease both}
+.page[hidden]{display:none}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+section{padding:120px clamp(28px,9vw,140px) 50px}
+#s-top{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-bottom:80px}
+.page>section+section{padding-top:30px}
+nav.top a[aria-current="page"]{color:var(--red);border-bottom:2px solid var(--red);padding-bottom:3px}
+h1,h2,h3{font-weight:400;margin:0}
+h1{font-size:clamp(1.9rem,6.4vw,5.4rem);line-height:1.18;letter-spacing:.2em;text-transform:uppercase;font-weight:300;
+  animation:settle 1.6s cubic-bezier(.2,.7,.2,1) both}
+h1 em{font-style:normal;color:var(--red);text-transform:lowercase}
+@keyframes settle{from{letter-spacing:.55em;opacity:0}to{letter-spacing:.2em;opacity:1}}
+.sub{margin:22px 0 0;font-size:1rem}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:70px}
+.hero-row p{max-width:420px;margin:0;font-size:.88rem}
+.scroll{display:flex;align-items:center;gap:16px;text-decoration:none;font-size:.8rem}
+.scroll span.c{width:34px;height:34px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center}
+.scroll span.l{width:80px;height:1px;background:var(--ink)}
+
+h2{font-size:clamp(1.3rem,3vw,2.1rem);letter-spacing:.24em;text-transform:uppercase;font-weight:300;margin-bottom:34px}
+h2::after{content:"";display:block;width:34px;height:3px;background:var(--red);margin-top:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:980px}
+.box{background:rgba(255,255,255,.62);border:1px solid var(--line);padding:20px 22px;backdrop-filter:blur(6px)}
+.box h3{font-size:.95rem;letter-spacing:.14em;margin-bottom:8px}
+.box p,.box li{margin:0;font-size:.88rem;line-height:1.8}
+.box ul{margin:0;padding-left:18px}
+.where{font-size:.8rem;color:var(--muted);margin:2px 0 8px}
+.lead{max-width:640px;font-size:1rem}
+.lead+.lead{margin-top:14px;font-size:.9rem;color:var(--muted)}
+.contact a.big{display:inline-block;margin-top:10px;border-bottom:2px solid var(--red);font-size:1.1rem;text-decoration:none;padding-bottom:4px}
+footer{font-size:.72rem;color:var(--muted);margin-top:50px}
+
+
+/* certificates */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:980px}
+.tile .t{overflow-wrap:anywhere}
+.tile{aspect-ratio:1/1;position:relative;text-align:left;cursor:pointer;font:inherit;letter-spacing:inherit;color:var(--ink);
+  background:rgba(255,255,255,.62);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;justify-content:flex-end;
+  backdrop-filter:blur(6px);transition:transform .25s,background .25s,color .25s}
+.tile::before{content:"";position:absolute;top:14px;left:14px;width:10px;height:10px;background:var(--red)}
+.tile:hover{transform:translateY(-4px)}
+.tile .n{font-size:clamp(1.8rem,4vw,3rem);font-weight:300;line-height:1}
+.tile .t{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;margin-top:8px}
+.tile[aria-pressed="true"]{background:var(--char);color:#fff}
+.panel{max-width:980px;margin-top:26px}
+.panel[hidden]{display:none}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.bar h3{font-size:1rem;letter-spacing:.18em;text-transform:uppercase}
+.bar input{font:inherit;letter-spacing:.05em;padding:8px 14px;border:1px solid var(--line);background:rgba(255,255,255,.8);min-width:220px}
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;max-height:56vh;overflow:auto;padding-right:6px}
+.cert{background:rgba(255,255,255,.7);border:1px solid var(--line);border-left:3px solid var(--red);padding:12px 14px}
+.cert b{font-weight:400;display:block;font-size:.88rem;line-height:1.5}
+.cert span{font-size:.75rem;color:var(--muted)}
+.cert a{font-size:.75rem;margin-left:10px;color:var(--red)}
+.empty{font-size:.85rem;color:var(--muted)}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,1fr)}}
+
+/* certificate titles as links */
+.cert a.ct{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--red);margin:0;font-size:inherit}
+.cert a.ct:hover{color:var(--red)}
+/* research */
+.rbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:980px;margin-bottom:18px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{font:inherit;font-size:.8rem;letter-spacing:.1em;padding:6px 14px;border:1px solid var(--line);background:rgba(255,255,255,.6);cursor:pointer;color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--char);color:#fff}
+.count{font-size:.8rem;color:var(--muted)}
+.works{display:grid;gap:14px;max-width:980px}
+.work{display:grid;grid-template-columns:64px 1fr;background:rgba(255,255,255,.68);border:1px solid var(--line);backdrop-filter:blur(6px)}
+.work .no{font-size:1.6rem;font-weight:300;color:var(--red);padding:18px 0 0 18px}
+.work .bd{padding:18px 20px 16px 4px}
+.work .bib{margin:0 0 12px;font-size:.92rem;line-height:1.7}
+.work .meta2{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.78rem;color:var(--muted)}
+.tag{border:1px solid var(--line);padding:1px 10px;color:var(--ink);background:var(--paper,#eee)}
+.work a.cl{margin-left:auto;text-decoration:none;color:#fff;background:var(--red);padding:4px 14px;font-size:.78rem;letter-spacing:.08em}
+.work a.cl:hover{background:var(--char)}
+.work .nocert{margin-left:auto;font-size:.75rem}
+@media (max-width:640px){.work{grid-template-columns:44px 1fr}.work .no{padding-left:10px;font-size:1.2rem}}
+
+@media (max-width:760px){
+  nav.top{flex-direction:column;align-items:flex-start;gap:6px;padding:12px 18px;background:rgba(228,228,230,.92);backdrop-filter:blur(8px)}
+  nav.top ul{gap:16px;overflow-x:auto;max-width:100%;padding-bottom:4px}
+  .vert{display:none}
+  section{padding:110px 24px 40px}
+  h1{letter-spacing:.12em}
+  @keyframes settle{from{letter-spacing:.3em;opacity:0}to{letter-spacing:.12em;opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){h1,.page{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <i class="f1"></i><i class="f2"></i><i class="f3"></i>
+  <i class="dark1"></i><i class="dark2"></i><i class="sq"></i><i class="tri"></i>
+</div>
+
+<nav class="top">
+  <a class="logo" href="#home">oleh<b>.</b>k</a>
+  <ul id="menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="vert">© Oleh Kharkivskyi</div>
+
+<main class="page" id="pg-home">
+<section id="s-top">
+  <h1>Oleh<br>Kharkivskyi</h1>
+  <p class="sub">Aspiring cybersecurity specialist · Ukraine</p>
+  <div class="hero-row">
+    <a class="scroll" href="#profile"><span class="c">→</span><span class="l"></span>profile</a>
+    <p>Aspiring specialist in Cybersecurity and Information Protection with hands-on experience in information security, OSINT and CTF competitions.</p>
+  </div>
+</section>
+
+<section id="s-about">
+  <h2>About</h2>
+  <p class="lead">Beginner in cybersecurity, studying Cybersecurity and Information Protection at Kharkiv National University of Internal Affairs (2025 intake).</p>
+  <p class="lead">Participant in the Kharkiv Cybercenter Media Project and co-author of a scientific publication on multi-agent systems in corporate IT. I combine technical training with practical experience in law enforcement documentation and operational work.</p>
+</section>
+
+</main>
+<main class="page" id="pg-profile" hidden>
+<section id="s-skills">
+  <h2>Skills</h2>
+  <div class="grid">
+    <div class="box"><h3>Domains</h3><p>Cybersecurity, Information Security, Network Security, Penetration Testing, OSINT</p></div>
+    <div class="box"><h3>Tools</h3><p>Nmap, Burp Suite, BeEF, SET, Kali Linux, Oracle VirtualBox</p></div>
+    <div class="box"><h3>OSINT</h3><p>OSINT Framework, Maigret, Sherlock, Toutatis</p></div>
+    <div class="box"><h3>Platforms</h3><p>TryHackMe, CryptoHack</p></div>
+    <div class="box"><h3>Languages</h3><p>Ukrainian (native), English (C1)</p></div>
+  </div>
+</section>
+
+<section id="s-experience">
+  <h2>Experience</h2>
+  <div class="grid">
+    <div class="box"><h3>Kharkiv Cybercenter Media Project</h3><div class="where">Participant</div>
+      <ul><li>Took part in media and cybersecurity activities.</li><li>Practice at the intersection of cyber awareness and public communication.</li></ul></div>
+    <div class="box"><h3>Practical police training</h3><div class="where">Kamianets-Podilskyi District Police Department</div>
+      <ul><li>Prepared official documentation and reports, including MARCH protocol reports.</li><li>Supported daily operational work under officer supervision.</li></ul></div>
+    <div class="box"><h3>CTF and cryptography</h3><div class="where">TryHackMe, CryptoHack</div>
+      <ul><li>Solved tasks in cryptography, information security and penetration testing.</li><li>Applied offensive and defensive techniques in lab environments.</li></ul></div>
+  </div>
+</section>
+
+<section id="s-education">
+  <h2>Education</h2>
+  <div class="grid">
+    <div class="box"><h3>Kharkiv National University of Internal Affairs</h3>
+      <div class="where">2025 – present</div><p>Cybersecurity and Information Protection</p></div>
+    <div class="box"><h3>Courses</h3>
+      <ul><li>Academic Integrity at the University, VUM Online, 2026</li><li>Whistleblower in the Law, Diia.Education</li><li>Cyber Hygiene for Youth, Diia.Education</li></ul></div>
+    <div class="box"><h3>Publication</h3><div class="where">Co-author · December 2025</div>
+      <p>Architecture of Autonomous Agents and Multi-Agent Orchestration in Corporate IT Ecosystems</p></div>
+  </div>
+</section>
+
+</main>
+<main class="page" id="pg-certificates" hidden>
+<section id="s-certificates">
+  <h2>Certificates</h2>
+  <p class="lead" style="margin-bottom:28px">Choose a platform to see every certificate earned there.</p>
+  <div class="tiles" id="tiles"></div>
+  <div class="panel" id="panel" hidden>
+    <div class="bar"><h3 id="ptitle"></h3><input id="q" type="search" placeholder="Search" aria-label="Search certificates"></div>
+    <div class="certs" id="certs"></div>
+  </div>
+</section>
+
+</main>
+<main class="page" id="pg-research" hidden>
+<section id="s-research">
+  <h2>Scientific work</h2>
+  <p class="lead" style="margin-bottom:24px">Publications and international conference theses.</p>
+  <div class="rbar"><div class="filters" id="rfilters"></div><span class="count" id="rcount"></span></div>
+  <div class="works" id="works"></div>
+</section>
+</main>
+<main class="page" id="pg-contact" hidden>
+<section id="s-contact" class="contact">
+  <h2>Contact</h2>
+  <p class="lead">Open to internships and collaboration in cybersecurity and OSINT.</p>
+  <div><a class="big" href="mailto:poleg2021@gmail.com">poleg2021@gmail.com</a></div>
+  <footer>© Oleh Kharkivskyi</footer>
+</section>
+
+</main>
+<script>
+/* Certificates: ["Title", "Date", "Link (optional)"] — edit or add rows here. */
+var PLATFORMS=[
+ {
+  "name": "Дія.Освіта",
+  "folder": "",
+  "certs": [
+   [
+    "Не нашкод: підтримка після звільнення з полону",
+    "06.10.2026",
+    ""
+   ],
+   [
+    "Цифрові навички та онлайн-безпека",
+    "06.10.2026",
+    ""
+   ],
+   [
+    "Персональна кібергігієна",
+    "19.06.2026",
+    ""
+   ],
+   [
+    "Залученість і доступність у роботі Національної поліції",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Онлайн-безпека для дітей",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Онлайн-безпека для підлітків",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Основи роботи з відкритими даними",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Квест «Гігієна й МережаХ»: безпечна поведінка в інтернеті та кібергігієна (Експерт, 137/140)",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Кібергігієна: як захиститися від фішингу",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Особиста безпека підлітка",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Кібергігієна для молоді",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "ДезінFAKEція",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Цифрова політична освіта для молоді",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Діджитал-фізкультура для школярів за участі зірок спорту",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Про кібербулінг для підлітків",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Кіберняні",
+    "06.06.2026",
+    ""
+   ],
+   [
+    "Базові знання про гендер",
+    "01.05.2026",
+    ""
+   ],
+   [
+    "Люди з досвідом війни. Гідність. Взаємодія",
+    "01.05.2026",
+    ""
+   ],
+   [
+    "Обережно! Кібершахраї",
+    "01.05.2026",
+    ""
+   ],
+   [
+    "Школа OSINT",
+    "18.03.2026",
+    ""
+   ],
+   [
+    "Академічна доброчесність в університеті (VUM Online)",
+    "17.03.2026",
+    ""
+   ],
+   [
+    "Про НАТО (VUM Online)",
+    "09.12.2025",
+    ""
+   ]
+  ]
+ },
+ {
+  "name": "Prometheus",
+  "folder": "",
+  "certs": [
+   [
+    "Дезінформація: види, інструменти та способи захисту",
+    "26.05.2026",
+    "https://certs.prometheus.org.ua/cert/17b811583a734d508f9879cbda1bc223"
+   ],
+   [
+    "Від початківця до експерта в ШІ",
+    "16.04.2026",
+    ""
+   ],
+   [
+    "Україна на шляху до ЄС",
+    "11.03.2026",
+    "https://certs.prometheus.org.ua/cert/9675494504664d09918266445d173515"
+   ],
+   [
+    "OSINT — розвідка з відкритих джерел та інформаційна безпека",
+    "03.02.2026",
+    "https://certs.prometheus.org.ua/cert/35810299ce714c6885cd1065d1c5d966"
+   ],
+   [
+    "Торгівля людьми: як захистити себе та близьких",
+    "03.02.2026",
+    "https://certs.prometheus.org.ua/cert/8426fb5c22924adabe833bc8e37f9ea8"
+   ],
+   [
+    "Безпека в інтернеті під час війни: практичний курс",
+    "06.12.2025",
+    "https://certs.prometheus.org.ua/cert/d362d3e32c2b4566b3b6bb6c79bec42d"
+   ],
+   [
+    "Медіаграмотність: як не піддаватися маніпуляціям?",
+    "24.11.2025",
+    "https://certs.prometheus.org.ua/cert/21c54c9ad95c42a7bcb341fa29d48865"
+   ],
+   [
+    "CS50: Вступ до кібербезпеки",
+    "22.11.2025",
+    ""
+   ],
+   [
+    "Протидія торгівлі людьми в Україні. Вплив війни",
+    "30.10.2025",
+    "https://certs.prometheus.org.ua/cert/aecfcab613484045a06a0b73f28fbf19"
+   ],
+   [
+    "Інформаційна гігієна під час війни",
+    "24.10.2025",
+    "https://certs.prometheus.org.ua/cert/2e8b6dc6cb534ea2a68f043b55fad136"
+   ],
+   [
+    "Зрозуміло про конфлікт інтересів",
+    "15.10.2025",
+    "https://certs.prometheus.org.ua/cert/291b3f336afa4c31b60e024c99e49321"
+   ],
+   [
+    "Комунікація щодо національних спільнот для пресслужб поліції та прокуратури",
+    "03.10.2025",
+    "https://certs.prometheus.org.ua/cert/2238a2243ed64ee8a6b1b4293eb0c6e7"
+   ],
+   [
+    "Перша домедична допомога в умовах війни",
+    "27.09.2025",
+    "https://certs.prometheus.org.ua/cert/c921a522c8244750893e4b4710494c85"
+   ],
+   [
+    "Основи інформаційної безпеки",
+    "21.09.2025",
+    "https://certs.prometheus.org.ua/cert/13437921c0b4428bac824cea9beb3305"
+   ]
+  ]
+ },
+ {
+  "name": "CodeRed",
+  "folder": "",
+  "certs": [
+   [
+    "A Practical Introduction to Cloud Computing",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Make In-house Hacking and Pentesting Lab",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Introduction to SAN and NAS Storage",
+    "14.06.2026",
+    ""
+   ],
+   [
+    "Cisco LABS Crash Course",
+    "01.05.2026",
+    ""
+   ],
+   [
+    "Android Bug Bounty Hunting: Hunt Like a Rat",
+    "20.03.2026",
+    ""
+   ],
+   [
+    "Cybersecurity for Businesses: The Fundamental Edition",
+    "14.03.2026",
+    ""
+   ],
+   [
+    "Introduction to Dark Web, Anonymity, and Cryptocurrency",
+    "14.03.2026",
+    ""
+   ]
+  ]
+ },
+ {
+  "name": "EdEra",
+  "folder": "",
+  "certs": [
+   [
+    "Very Verified 2.0: онлайн-курс із медіаграмотності",
+    "23.05.2026",
+    ""
+   ],
+   [
+    "Візуй професійно",
+    "13.03.2026",
+    ""
+   ],
+   [
+    "Корупція-off: як боротися з корупційними ризиками у вищій освіті",
+    "03.02.2026",
+    ""
+   ],
+   [
+    "Академічна доброчесність",
+    "07.09.2025",
+    ""
+   ]
+  ]
+ },
+ {
+  "name": "Cisco Networking Academy",
+  "folder": "",
+  "certs": [
+   [
+    "Networking Devices and Initial Configuration",
+    "06.10.2026",
+    ""
+   ],
+   [
+    "Introduction to IoT and Digital Transformation",
+    "14.06.2026",
+    ""
+   ]
+  ]
+ },
+ {
+  "name": "Other",
+  "folder": "",
+  "certs": [
+   [
+    "Kharkiv Regional Rookie CTF — 1st place",
+    "23.11.2025",
+    ""
+   ],
+   [
+    "Linux Foundation — A Beginner's Guide to Linux Kernel Development (LFD103)",
+    "18.10.2025",
+    ""
+   ],
+   [
+    "UNITAR × UNOCT — Foundational Course on Counter-Terrorism in the UN System",
+    "",
+    ""
+   ]
+  ]
+ }
+];
+/* Optional: set "folder" for a platform to use one shared link for certificates without their own link. */
+(function(){
+  var tiles=document.getElementById('tiles'),panel=document.getElementById('panel'),
+      title=document.getElementById('ptitle'),list=document.getElementById('certs'),q=document.getElementById('q'),cur=-1;
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+  function render(){
+    var f=q.value.toLowerCase(),c=PLATFORMS[cur].certs.filter(function(x){return x[0].toLowerCase().indexOf(f)>-1});
+    list.innerHTML=c.length?c.map(function(x){
+      var u=x[2]||PLATFORMS[cur].folder||'';
+      return '<div class="cert"><b>'+(u?'<a class="ct" href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(x[0])+' ↗</a>':esc(x[0]))+'</b><span>'+esc(x[1])+'</span></div>'}).join(''):'<p class="empty">Nothing found.</p>';
+  }
+  PLATFORMS.forEach(function(p,i){
+    var b=document.createElement('button');b.className='tile';b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="n">'+p.certs.length+'</span><span class="t">'+esc(p.name)+'</span>';
+    b.onclick=function(){
+      var same=cur===i;cur=same?-1:i;
+      [].forEach.call(tiles.children,function(t,k){t.setAttribute('aria-pressed',String(k===cur))});
+      panel.hidden=same;
+      if(!same){title.textContent=p.name+' · '+p.certs.length;q.value='';render();}
+    };
+    tiles.appendChild(b);
+  });
+  q.oninput=function(){if(cur>-1)render()};
+})();
+</script>
+<script>
+/* Research: {bib:"bibliographic description", type:"Тези", collection:"collection", date:"dd.mm.yyyy", cert:"certificate link"} */
+var RESEARCH=[
+ {bib:"Bibliographic description of the work goes here (authors, title, conference).",type:"Тези",collection:"Collection of conference proceedings",date:"00.00.2026",cert:""},
+ {bib:"Another work: authors, title, publication details.",type:"Стаття",collection:"Journal or collection",date:"00.00.2025",cert:""}
+];
+(function(){
+  var box=document.getElementById('works'),fl=document.getElementById('rfilters'),ct=document.getElementById('rcount'),cur='All';
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+  var types=['All'];RESEARCH.forEach(function(w){if(types.indexOf(w.type)<0)types.push(w.type)});
+  function draw(){
+    var list=RESEARCH.filter(function(w){return cur==='All'||w.type===cur});
+    ct.textContent=list.length+' / '+RESEARCH.length;
+    box.innerHTML=list.map(function(w,i){
+      return '<article class="work"><div class="no">'+String(i+1).padStart(2,'0')+'</div><div class="bd"><p class="bib">'+esc(w.bib)+'</p><div class="meta2">'+
+      '<span class="tag">'+esc(w.type)+'</span><span>'+esc(w.collection)+'</span><span>'+esc(w.date)+'</span>'+
+      (w.cert?'<a class="cl" href="'+esc(w.cert)+'" target="_blank" rel="noopener">Certificate ↗</a>':'')+'</div></div></article>'}).join('');
+  }
+  types.forEach(function(t){
+    var b=document.createElement('button');b.textContent=t;b.setAttribute('aria-pressed',String(t===cur));
+    b.onclick=function(){cur=t;[].forEach.call(fl.children,function(x){x.setAttribute('aria-pressed',String(x===b))});draw()};
+    fl.appendChild(b);
+  });
+  draw();
+})();
+(function(){
+  var names=['home','profile','certificates','research','contact'];
+  var links=[].slice.call(document.querySelectorAll('nav.top a[href^="#"]'));
+  function go(){
+    var h=(location.hash||'#home').slice(1);if(names.indexOf(h)<0)h='home';
+    names.forEach(function(n){document.getElementById('pg-'+n).hidden=(n!==h)});
+    links.forEach(function(a){if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',go);go();
+})();
+</script>
+</body>
+</html>
